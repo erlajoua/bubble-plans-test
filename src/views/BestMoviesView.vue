@@ -12,7 +12,7 @@ export default {
       decades: [] as string[],
       page: 1 as number,
       totalPages: null as number | null,
-      isLoading: false as boolean,
+      isLoading: true as boolean,
       searchQuery: '' as string,
       selectedGenre: '' as any,
       genreMappings: [] as IGenre[],
@@ -69,13 +69,12 @@ export default {
           })
 
           this.updateGenreMappings()
+          this.isLoading = false
         } catch (error) {
           console.error('Error while fetching movies')
           break
         }
       }
-
-      this.isLoading = false
     },
     finalizeDecadesSorting() {
       Object.keys(this.filteredMovies).forEach((decade) => {
