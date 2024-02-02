@@ -1,7 +1,7 @@
 <script lang="ts">
-import axios from 'axios'
 import MovieCard from '../components/MovieCard.vue'
 import type { IMovie, IGenre } from '@/shared/types'
+import { fetchMovieDetails } from '@/services/tmdbApi'
 
 export default {
   name: 'CardView',
@@ -24,17 +24,9 @@ export default {
   },
   async mounted() {
     this.isLoading = true
-    const movieId = this.$route.params.id
+    const movieId = this.$route.params.id as string;
     try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-        {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`
-          }
-        }
-      )
-      this.movie = response.data
+      this.movie = this.movie = await fetchMovieDetails(movieId);
     } catch (error) {
       console.log(error)
     } finally {

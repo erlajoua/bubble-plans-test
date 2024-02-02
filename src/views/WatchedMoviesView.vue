@@ -1,5 +1,4 @@
 <script lang="ts">
-import axios from 'axios'
 import MovieCard from '../components/MovieCard.vue'
 import type { IMovie } from '@/shared/types'
 import { fetchMoviesByIds } from '../services/tmdbApi'
